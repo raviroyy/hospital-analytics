@@ -3,11 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Connect to MySQL
+# ------------------------------
+# 1. Connect to MySQL
+# ------------------------------
 conn = mysql.connector.connect(
     host="localhost",
-    user="root",                # replace with your user
-    password="YOUR_PASSWORD",   # replace with your password
+    user="root",                
+    password="Gixxerr@1408",   
     database="hospital_db"
 )
 
@@ -17,42 +19,57 @@ conn.close()
 
 # Convert visit_date to datetime
 df['visit_date'] = pd.to_datetime(df['visit_date'])
+df['month'] = df['visit_date'].dt.to_period('M')
 
-# Prepare analytics
-monthly_patients = df.groupby(df['visit_date'].dt.to_period('M')).size()
-doctor_counts = df['doctor_type'].value_counts()
-equipment_counts = df['equipment_used'].value_counts()
+# ------------------------------
+# 2. Prepare Aggregated Analytics
+# ------------------------------
+monthly_visits = df.groupby('month')['visit_count'].sum()
+doctor_monthly = df.groupby(['month', 'doctor_type'])['visit_count'].sum().unstack(fill_value=0)
+equipment_monthly = df.groupby(['month', 'equipment_used'])['visit_count'].sum().unstack(fill_value=0)
 
-# Create a figure with 3 subplots
-fig, axes = plt.subplots(3, 1, figsize=(12, 15))
-fig.tight_layout(pad=6)
-
-# -----------------------
-# 1. Monthly Patient Count
-# -----------------------
-axes[0].bar(monthly_patients.index.astype(str), monthly_patients.values, color='skyblue')
-axes[0].set_title("Monthly Patient Count", fontsize=16)
-axes[0].set_xlabel("Month")
-axes[0].set_ylabel("Number of Patients")
-axes[0].tick_params(axis='x', rotation=45)
+# ------------------------------
+# 3. Create Horizontal-Text Dashboard
+# ------------------------------
+fig, axes = plt.subplots(3, 1, figsize=(16, 14))  # compact, readable
+fig.suptitle("Hospital Analytics Dashboard", fontsize=20, y=0.95)
 
 # -----------------------
-# 2. Doctor Type Distribution
+# Section 1: Monthly Patient Visits
 # -----------------------
-sns.barplot(x=doctor_counts.index, y=doctor_counts.values, ax=axes[1], palette="Set2")
-axes[1].set_title("Doctor Type Distribution", fontsize=16)
-axes[1].set_xlabel("Doctor Type")
-axes[1].set_ylabel("Number of Visits")
-axes[1].tick_params(axis='x', rotation=45)
+sns.barplot(x=monthly_visits.index.astype(str), y=monthly_visits.values, palette="Blues_d", ax=axes[0])
+axes[0].set_title("Monthly Patient Visits", fontsize=16)
+axes[0].set_ylabel("Visits", fontsize=12)
+axes[0].set_xlabel("")
+axes[0].tick_params(axis='x', rotation=0, labelsize=10)  # horizontal
+axes[0].grid(axis='y', linestyle='--', alpha=0.6)
 
 # -----------------------
-# 3. Equipment Usage
+# Section 2: Doctor Visits per Month
 # -----------------------
-sns.barplot(x=equipment_counts.index, y=equipment_counts.values, ax=axes[2], palette="Set1")
-axes[2].set_title("Equipment Usage", fontsize=16)
-axes[2].set_xlabel("Equipment")
-axes[2].set_ylabel("Number of Uses")
-axes[2].tick_params(axis='x', rotation=45)
+doctor_monthly.plot(kind='bar', stacked=True, ax=axes[1], colormap='Set2', width=0.7)
+axes[1].set_title("Doctor Visits per Month", fontsize=16)
+axes[1].set_ylabel("Visits", fontsize=12)
+axes[1].set_xlabel("")
+axes[1].tick_params(axis='x', rotation=0, labelsize=10)  # horizontal
+axes[1].grid(axis='y', linestyle='--', alpha=0.6)
+axes[1].legend(title='Doctor Type', bbox_to_anchor=(1.02, 1), loc='upper left', fontsize=10)
 
-# Show combined figure
+# -----------------------
+# Section 3: Equipment Usage per Month
+# -----------------------
+equipment_monthly.plot(kind='bar', stacked=True, ax=axes[2], colormap='Set1', width=0.7)
+axes[2].set_title("Equipment Usage per Month", fontsize=16)
+axes[2].set_ylabel("Usage", fontsize=12)
+axes[2].set_xlabel("Month", fontsize=12)
+axes[2].tick_params(axis='x', rotation=0, labelsize=10)  # horizontal
+axes[2].grid(axis='y', linestyle='--', alpha=0.6)
+axes[2].legend(title='Equipment', bbox_to_anchor=(1.02, 1), loc='upper left', fontsize=10)
+
+# -----------------------
+# Layout adjustments
+# -----------------------
+plt.tight_layout(rect=[0, 0, 0.83, 0.93], pad=4)  # reserve space for legends
+
+# Show dashboard
 plt.show()
