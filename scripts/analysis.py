@@ -6,65 +6,53 @@ import seaborn as sns
 # Connect to MySQL
 conn = mysql.connector.connect(
     host="localhost",
-    user="root",
-    password="Gixxerr@1408",  
+    user="root",                # replace with your user
+    password="YOUR_PASSWORD",   # replace with your password
     database="hospital_db"
 )
 
-# Load data into DataFrame
+# Load data
 df = pd.read_sql("SELECT * FROM hospital_visits", conn)
 conn.close()
 
 # Convert visit_date to datetime
 df['visit_date'] = pd.to_datetime(df['visit_date'])
 
-# ---------------------------
-# Monthly Patient Count
-# ---------------------------
+# Prepare analytics
 monthly_patients = df.groupby(df['visit_date'].dt.to_period('M')).size()
-print("Monthly patient count:")
-print(monthly_patients)
-
-# Plot monthly patient count
-plt.figure(figsize=(10,5))
-monthly_patients.plot(kind='bar', color='skyblue')
-plt.title("Monthly Patient Count")
-plt.xlabel("Month")
-plt.ylabel("Number of Patients")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
-
-# ---------------------------
-# Most Visited Doctor Type
-# ---------------------------
 doctor_counts = df['doctor_type'].value_counts()
-print("\nMost visited doctor type:")
-print(doctor_counts)
-
-# Plot doctor type distribution
-plt.figure(figsize=(8,4))
-sns.barplot(x=doctor_counts.index, y=doctor_counts.values, palette="Set2")
-plt.title("Doctor Type Distribution")
-plt.xlabel("Doctor Type")
-plt.ylabel("Number of Visits")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
-
-# ---------------------------
-# Equipment Usage
-# ---------------------------
 equipment_counts = df['equipment_used'].value_counts()
-print("\nEquipment usage:")
-print(equipment_counts)
 
-# Plot equipment usage
-plt.figure(figsize=(8,4))
-sns.barplot(x=equipment_counts.index, y=equipment_counts.values, palette="Set1")
-plt.title("Equipment Usage")
-plt.xlabel("Equipment")
-plt.ylabel("Number of Uses")
-plt.xticks(rotation=45)
-plt.tight_layout()
+# Create a figure with 3 subplots
+fig, axes = plt.subplots(3, 1, figsize=(12, 15))
+fig.tight_layout(pad=6)
+
+# -----------------------
+# 1. Monthly Patient Count
+# -----------------------
+axes[0].bar(monthly_patients.index.astype(str), monthly_patients.values, color='skyblue')
+axes[0].set_title("Monthly Patient Count", fontsize=16)
+axes[0].set_xlabel("Month")
+axes[0].set_ylabel("Number of Patients")
+axes[0].tick_params(axis='x', rotation=45)
+
+# -----------------------
+# 2. Doctor Type Distribution
+# -----------------------
+sns.barplot(x=doctor_counts.index, y=doctor_counts.values, ax=axes[1], palette="Set2")
+axes[1].set_title("Doctor Type Distribution", fontsize=16)
+axes[1].set_xlabel("Doctor Type")
+axes[1].set_ylabel("Number of Visits")
+axes[1].tick_params(axis='x', rotation=45)
+
+# -----------------------
+# 3. Equipment Usage
+# -----------------------
+sns.barplot(x=equipment_counts.index, y=equipment_counts.values, ax=axes[2], palette="Set1")
+axes[2].set_title("Equipment Usage", fontsize=16)
+axes[2].set_xlabel("Equipment")
+axes[2].set_ylabel("Number of Uses")
+axes[2].tick_params(axis='x', rotation=45)
+
+# Show combined figure
 plt.show()

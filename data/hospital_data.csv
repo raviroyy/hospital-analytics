@@ -3,3 +3,20 @@ P001,2025-01-02,Morning,1,Fever,General Physician,ECG
 P002,2025-01-05,Evening,1,Diabetes,Physician,None
 P003,2025-01-10,Morning,1,Fracture,Surgeon,X-Ray
 P004,2025-01-15,Evening,1,Heart Disease,Cardiologist,ECG
+patient_id,visit_date,visit_time,visit_count,disease,doctor_type,equipment_used
+P001,2025-07-01,Morning,1,Common Cold,General Physician,None
+P002,2025-07-01,Afternoon,1,Common Cold,General Physician,None
+P003,2025-07-01,Morning,1,Common Cold,General Physician,None
+...
+P080,2025-07-31,Evening,1,Common Cold,General Physician,None
+P081,2025-07-05,Morning,1,Diabetes,Diabetic,ECG
+P082,2025-07-10,Afternoon,1,Diabetes,Diabetic,ECG
+...
+P100,2025-07-31,Evening,1,Diabetes,Diabetic,ECG
+P101,2025-05-01,Morning,1,Stomach Pain,General Physician,X-Ray
+P102,2025-05-01,Afternoon,1,Stomach Pain,General Physician,X-Ray
+...
+P150,2025-05-31,Evening,1,Stomach Pain,General Physician,X-Ray
+P151,2025-05-10,Morning,1,Diabetes,Diabetic,X-Ray
+P152,2025-05-15,Afternoon,1,Diabetes,Diabetic,X-Ray
+
