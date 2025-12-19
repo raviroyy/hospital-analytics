@@ -1,0 +1,5 @@
+patient_id,visit_date,visit_time,visit_count,disease,doctor_type,equipment_used
+P001,2025-01-02,Morning,1,Fever,General Physician,ECG
+P002,2025-01-05,Evening,1,Diabetes,Physician,None
+P003,2025-01-10,Morning,1,Fracture,Surgeon,X-Ray
+P004,2025-01-15,Evening,1,Heart Disease,Cardiologist,ECG
