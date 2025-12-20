@@ -1,13 +1,121 @@
-P023,2025-07-15,Morning,1,Diabetes,Chronic,Moderate,Diabetologist,ECG,Yes,Endocrinology
-P024,2025-07-16,Afternoon,2,Hypertension,Acute,Severe,Cardiologist,MRI,No,Cardiology
-P025,2025-07-17,Evening,1,Asthma,Chronic,Mild,Pulmonologist,X-Ray,Yes,Pulmonology
-P026,2025-07-18,Night,3,COVID-19,Acute,Severe,Infectious Disease Specialist,CT Scan,No,Infectious Diseases
-P027,2025-07-19,Morning,1,Arthritis,Chronic,Moderate,Rheumatologist,Ultrasound,Yes,Rheumatology
-P028,2025-07-20,Afternoon,2,Depression,Chronic,Mild,Psychiatrist,None,No,Mental Health
-P029,2025-07-21,Evening,1,Stroke,Acute,Severe,Neurologist,MRI,Yes,Neurology
-P031,2025-07-23,Morning,1,Obesity,Chronic,Moderate,Dietitian,None,Yes,Nutrition
-P032,2025-07-24,Afternoon,2,Anemia,Chronic,Mild,Hematologist,Blood Test,No,Hematology
-P033,2025-07-25,Evening,1,Allergy,Acute,Mild,Allergist,Skin Test,Yes,Immunology
-P034,2025-07-26,Night,3,Epilepsy,Chronic,Severe,Neurologist,EEG,No,Neurology
-P035,2025-07-27,Morning,1,Glaucoma,Chronic,Moderate,Ophthalmologist,Eye Exam,Yes,Ophthalmology
-P036,2025-07-28,Afternoon,2,COPD,Chronic,Severe,Pulmonologist,Spirometry,No,Pulmonology
+patient_id,visit_date,visit_time,visit_count,disease,disease_category,severity,doctor_type,equipment_used,referred,referred_to
+P016,2025-06-01,Evening,1,Heart Disease,Chronic,Medium,General Physician,X-Ray,No,None
+P015,2025-06-24,Morning,1,Stomach Pain,General,High,Diabetic,CT Scan,Yes,Specialist Hospital
+P040,2025-09-23,Morning,1,Fracture,General,Low,General Physician,MRI,No,None
+P002,2025-12-15,Afternoon,1,Fracture,General,Medium,Surgeon,ECG,No,None
+P033,2025-03-01,Morning,1,Fracture,General,Medium,Diabetic,None,No,None
+P016,2025-04-27,Morning,1,Stomach Pain,General,High,Cardiologist,ECG,Yes,Specialist Hospital
+P025,2025-05-20,Afternoon,1,Diabetes,Chronic,High,Diabetic,Ultrasound,Yes,Specialist Hospital
+P012,2025-03-19,Evening,1,Common Cold,General,Low,General Physician,Ultrasound,No,None
+P012,2025-08-02,Evening,1,Fever,General,Medium,Diabetic,Blood Test,No,None
+P006,2025-04-05,Morning,1,Heart Disease,Chronic,Low,Cardiologist,Ultrasound,No,None
+P010,2025-01-07,Morning,1,Common Cold,General,Medium,General Physician,CT Scan,No,None
+P024,2025-11-18,Afternoon,1,Stomach Pain,General,High,Surgeon,MRI,Yes,Specialist Hospital
+P004,2025-01-17,Morning,1,Stomach Pain,General,Medium,Surgeon,MRI,No,None
+P035,2025-02-13,Morning,1,Common Cold,General,Low,Diabetic,CT Scan,No,None
+P030,2025-02-06,Evening,1,Heart Disease,Chronic,Low,Surgeon,Blood Test,No,None
+P042,2025-12-03,Afternoon,1,Common Cold,General,Medium,Diabetic,X-Ray,No,None
+P045,2025-09-28,Afternoon,1,Fracture,General,High,Diabetic,X-Ray,Yes,Specialist Hospital
+P050,2025-07-30,Afternoon,1,Fever,General,Medium,Diabetic,Ultrasound,No,None
+P013,2025-09-13,Evening,1,Common Cold,General,Medium,General Physician,X-Ray,No,None
+P031,2025-04-25,Morning,1,Fever,General,High,Surgeon,Ultrasound,Yes,Specialist Hospital
+P021,2025-09-11,Afternoon,1,Diabetes,Chronic,Medium,General Physician,CT Scan,No,None
+P040,2025-09-10,Morning,1,Diabetes,Chronic,Medium,Diabetic,Ultrasound,No,None
+P018,2025-03-20,Evening,1,Common Cold,General,High,Surgeon,Ultrasound,Yes,Specialist Hospital
+P043,2025-03-12,Evening,1,Stomach Pain,General,Medium,Surgeon,Ultrasound,No,None
+P049,2025-12-16,Afternoon,1,Diabetes,Chronic,Medium,Surgeon,CT Scan,No,None
+P022,2025-11-10,Afternoon,1,Fracture,General,High,Surgeon,CT Scan,Yes,Specialist Hospital
+P040,2025-07-21,Evening,1,Stomach Pain,General,Low,Cardiologist,Blood Test,No,None
+P025,2025-09-03,Morning,1,Diabetes,Chronic,High,Cardiologist,ECG,Yes,Specialist Hospital
+P027,2025-09-15,Afternoon,1,Heart Disease,Chronic,Low,Diabetic,X-Ray,No,None
+P002,2025-02-03,Evening,1,Stomach Pain,General,Low,Diabetic,Ultrasound,No,None
+P011,2025-11-21,Morning,1,Common Cold,General,Low,Diabetic,ECG,No,None
+P037,2025-03-16,Afternoon,1,Fracture,General,Medium,General Physician,Ultrasound,No,None
+P001,2025-05-02,Morning,1,Fever,General,High,Surgeon,ECG,Yes,Specialist Hospital
+P025,2025-08-20,Evening,1,Common Cold,General,Low,General Physician,X-Ray,No,None
+P014,2025-03-24,Morning,1,Fracture,General,High,General Physician,Blood Test,Yes,Specialist Hospital
+P030,2025-06-08,Evening,1,Fever,General,Medium,Cardiologist,CT Scan,No,None
+P048,2025-10-10,Evening,1,Stomach Pain,General,High,Cardiologist,None,Yes,Specialist Hospital
+P023,2025-02-16,Morning,1,Fracture,General,High,Cardiologist,Blood Test,Yes,Specialist Hospital
+P021,2025-01-18,Morning,1,Diabetes,Chronic,High,Cardiologist,Ultrasound,Yes,Specialist Hospital
+P004,2025-04-22,Evening,1,Fever,General,Low,Surgeon,MRI,No,None
+P009,2025-10-04,Morning,1,Heart Disease,Chronic,Medium,Surgeon,X-Ray,No,None
+P027,2025-11-09,Evening,1,Common Cold,General,High,Diabetic,CT Scan,Yes,Specialist Hospital
+P022,2025-10-16,Morning,1,Stomach Pain,General,Medium,Cardiologist,Ultrasound,No,None
+P034,2025-09-23,Evening,1,Diabetes,Chronic,Low,General Physician,CT Scan,No,None
+P033,2025-03-03,Morning,1,Common Cold,General,Low,Diabetic,CT Scan,No,None
+P007,2025-12-14,Morning,1,Fever,General,Medium,Surgeon,X-Ray,No,None
+P023,2025-10-11,Evening,1,Heart Disease,Chronic,Low,General Physician,MRI,No,None
+P004,2025-05-12,Morning,1,Fever,General,Medium,Surgeon,X-Ray,No,None
+P026,2025-01-26,Morning,1,Diabetes,Chronic,Low,Diabetic,Ultrasound,No,None
+P048,2025-12-23,Evening,1,Stomach Pain,General,Low,Diabetic,Ultrasound,No,None
+P044,2025-03-10,Morning,1,Common Cold,General,Low,Cardiologist,CT Scan,No,None
+P029,2025-02-12,Morning,1,Stomach Pain,General,High,Cardiologist,Blood Test,Yes,Specialist Hospital
+P018,2025-04-28,Evening,1,Fever,General,Low,Diabetic,CT Scan,No,None
+P007,2025-04-27,Morning,1,Common Cold,General,High,Surgeon,Blood Test,Yes,Specialist Hospital
+P044,2025-04-06,Morning,1,Fracture,General,High,General Physician,ECG,Yes,Specialist Hospital
+P032,2025-07-10,Evening,1,Fracture,General,Low,Diabetic,None,No,None
+P044,2025-06-26,Evening,1,Diabetes,Chronic,Medium,Surgeon,None,No,None
+P026,2025-12-27,Afternoon,1,Stomach Pain,General,Medium,Surgeon,CT Scan,No,None
+P011,2025-07-15,Afternoon,1,Fracture,General,High,Cardiologist,MRI,Yes,Specialist Hospital
+P035,2025-04-03,Afternoon,1,Heart Disease,Chronic,Medium,Cardiologist,X-Ray,No,None
+P010,2025-12-30,Morning,1,Heart Disease,Chronic,High,Diabetic,Ultrasound,Yes,Specialist Hospital
+P033,2025-04-25,Afternoon,1,Heart Disease,Chronic,High,Diabetic,ECG,Yes,Specialist Hospital
+P012,2025-01-06,Evening,1,Common Cold,General,Low,General Physician,X-Ray,No,None
+P001,2025-02-20,Morning,1,Fever,General,High,Surgeon,None,Yes,Specialist Hospital
+P009,2025-12-29,Evening,1,Stomach Pain,General,Low,General Physician,Blood Test,No,None
+P012,2025-01-19,Afternoon,1,Fracture,General,High,Diabetic,CT Scan,Yes,Specialist Hospital
+P043,2025-01-12,Afternoon,1,Stomach Pain,General,Medium,Surgeon,None,No,None
+P022,2025-03-01,Afternoon,1,Diabetes,Chronic,Medium,Cardiologist,ECG,No,None
+P040,2025-09-11,Evening,1,Heart Disease,Chronic,High,General Physician,X-Ray,Yes,Specialist Hospital
+P032,2025-01-26,Afternoon,1,Diabetes,Chronic,Low,Cardiologist,CT Scan,No,None
+P028,2025-11-08,Evening,1,Common Cold,General,Low,General Physician,Blood Test,No,None
+P015,2025-02-13,Evening,1,Common Cold,General,Low,Cardiologist,None,No,None
+P026,2025-04-14,Afternoon,1,Fever,General,Medium,General Physician,Ultrasound,No,None
+P045,2025-03-19,Evening,1,Diabetes,Chronic,High,Surgeon,Blood Test,Yes,Specialist Hospital
+P038,2025-02-03,Morning,1,Common Cold,General,High,Diabetic,CT Scan,Yes,Specialist Hospital
+P031,2025-01-09,Evening,1,Diabetes,Chronic,Low,General Physician,ECG,No,None
+P045,2025-03-17,Morning,1,Fever,General,Medium,Surgeon,ECG,No,None
+P025,2025-07-31,Morning,1,Stomach Pain,General,High,General Physician,ECG,Yes,Specialist Hospital
+P014,2025-09-30,Afternoon,1,Common Cold,General,Medium,Surgeon,None,No,None
+P048,2025-04-24,Morning,1,Common Cold,General,Low,Diabetic,CT Scan,No,None
+P044,2025-03-18,Afternoon,1,Fever,General,Low,Surgeon,CT Scan,No,None
+P014,2025-03-06,Evening,1,Stomach Pain,General,High,Cardiologist,ECG,Yes,Specialist Hospital
+P044,2025-04-02,Afternoon,1,Stomach Pain,General,High,Cardiologist,X-Ray,Yes,Specialist Hospital
+P019,2025-12-01,Evening,1,Fracture,General,High,Cardiologist,Blood Test,Yes,Specialist Hospital
+P028,2025-05-31,Afternoon,1,Common Cold,General,Low,Diabetic,Blood Test,No,None
+P001,2025-01-04,Evening,1,Fever,General,Low,General Physician,MRI,No,None
+P003,2025-01-18,Morning,1,Common Cold,General,Low,Cardiologist,None,No,None
+P011,2025-11-25,Morning,1,Common Cold,General,Medium,Surgeon,Ultrasound,No,None
+P048,2025-03-29,Evening,1,Fracture,General,High,Surgeon,Ultrasound,Yes,Specialist Hospital
+P016,2025-11-19,Afternoon,1,Diabetes,Chronic,Medium,Surgeon,Ultrasound,No,None
+P004,2025-10-05,Evening,1,Diabetes,Chronic,Medium,Diabetic,Ultrasound,No,None
+P005,2025-04-24,Afternoon,1,Diabetes,Chronic,Low,Cardiologist,MRI,No,None
+P008,2025-03-22,Afternoon,1,Heart Disease,Chronic,Medium,General Physician,Blood Test,No,None
+P040,2025-12-09,Morning,1,Stomach Pain,General,Medium,General Physician,MRI,No,None
+P017,2025-01-28,Morning,1,Heart Disease,Chronic,Low,Cardiologist,ECG,No,None
+P030,2025-05-19,Morning,1,Common Cold,General,Medium,Diabetic,Ultrasound,No,None
+P021,2025-08-09,Evening,1,Stomach Pain,General,Low,Diabetic,Ultrasound,No,None
+P028,2025-07-10,Morning,1,Fracture,General,High,General Physician,X-Ray,Yes,Specialist Hospital
+P041,2025-03-03,Morning,1,Heart Disease,Chronic,High,General Physician,Blood Test,Yes,Specialist Hospital
+P002,2025-04-18,Morning,1,Common Cold,General,High,Cardiologist,None,Yes,Specialist Hospital
+P027,2025-09-09,Evening,1,Fever,General,Low,Diabetic,None,No,None
+P002,2025-01-04,Afternoon,1,Diabetes,Chronic,Low,General Physician,MRI,No,None
+P032,2025-03-23,Evening,1,Diabetes,Chronic,High,Surgeon,Ultrasound,Yes,Specialist Hospital
+P001,2025-04-18,Evening,1,Fracture,General,Medium,Cardiologist,Ultrasound,No,None
+P017,2025-01-10,Evening,1,Fracture,General,High,Diabetic,None,Yes,Specialist Hospital
+P049,2025-08-23,Morning,1,Stomach Pain,General,High,Surgeon,CT Scan,Yes,Specialist Hospital
+P043,2025-04-15,Evening,1,Heart Disease,Chronic,Medium,Diabetic,ECG,No,None
+P010,2025-02-13,Evening,1,Diabetes,Chronic,High,Diabetic,X-Ray,Yes,Specialist Hospital
+P032,2025-03-26,Afternoon,1,Fever,General,Medium,General Physician,MRI,No,None
+P006,2025-02-13,Afternoon,1,Diabetes,Chronic,Medium,Surgeon,Blood Test,No,None
+P036,2025-03-01,Morning,1,Fever,General,Medium,General Physician,CT Scan,No,None
+P004,2025-12-02,Morning,1,Diabetes,Chronic,High,Cardiologist,MRI,Yes,Specialist Hospital
+P031,2025-12-19,Morning,1,Fever,General,High,Cardiologist,X-Ray,Yes,Specialist Hospital
+P043,2025-07-31,Morning,1,Common Cold,General,High,Cardiologist,MRI,Yes,Specialist Hospital
+P001,2025-12-29,Evening,1,Fracture,General,High,Cardiologist,CT Scan,Yes,Specialist Hospital
+P022,2025-03-08,Morning,1,Stomach Pain,General,Low,Surgeon,X-Ray,No,None
+P033,2025-04-22,Morning,1,Fever,General,High,Diabetic,MRI,Yes,Specialist Hospital
+P034,2025-12-12,Evening,1,Common Cold,General,High,Cardiologist,ECG,Yes,Specialist Hospital
+P047,2025-10-24,Afternoon,1,Stomach Pain,General,Medium,Cardiologist,Ultrasound,No,None
+P022,2025-11-04,Evening,1,Heart Disease,Chronic,High,Cardiologist,CT Scan,Yes,Specialist Hospital
