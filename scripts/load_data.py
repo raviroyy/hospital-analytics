@@ -23,8 +23,10 @@ cursor = conn.cursor()
 # Insert query
 insert_query = """
 INSERT INTO hospital_visits
-(patient_id, visit_date, visit_time, visit_count, disease, doctor_type, equipment_used)
-VALUES (%s, %s, %s, %s, %s, %s, %s)
+(patient_id, visit_date, visit_time, visit_count,
+ disease, disease_category, severity,
+ doctor_type, equipment_used, referred, referred_to)
+VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
 """
 
 # Clear table before inserting to avoid duplicates
