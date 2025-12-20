@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hospital Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Hospital Analytics Dashboard</title>
 </head>
 <body>
     <h1>Hospital Analytics Dashboard</h1>
     
     <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".csv">
-        <button type="submit">Upload & Analyze</button>
+        <input type="file" name="csv_files" multiple required>
+        <button type="submit">Upload & Generate</button>
     </form>
-    
-    <p>{{ message }}</p>
-    
-    {% if chart_img %}
-        <img src="data:image/png;base64,{{ chart_img }}">
+
+    {% if dashboard_img %}
+        <h2>Analytics Dashboard</h2>
+        <img src="data:image/png;base64,{{ dashboard_img }}" alt="Dashboard" style="width:100%; max-width:1200px;">
     {% endif %}
 </body>
 </html>
