@@ -1,0 +1,3 @@
+patient_id,visit_date,visit_time,visit_count,disease,disease_category,severity,doctor_type,equipment_used,referred,referred_to
+P044,2025-04-06,Morning,1,Fracture,General,High,General Physician,ECG,Yes,Specialist Hospital
+P044,2025-04-06,Morning,1,Fracture,General,High,General Physician,ECG,Yes,Specialist Hospital

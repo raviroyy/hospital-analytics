@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Dashboard</title>
+</head>
+<body>
+    <h1>Hospital Analytics Dashboard</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv">
+        <button type="submit">Upload & Analyze</button>
+    </form>
+    
+    <p>{{ message }}</p>
+    
+    {% if chart_img %}
+        <img src="data:image/png;base64,{{ chart_img }}">
+    {% endif %}
+</body>
+</html>
