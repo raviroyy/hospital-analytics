@@ -3,18 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <title>Hospital Analytics Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dashboard-img {
+            max-width: 100%;
+            margin-bottom: 30px;
+        }
+        .predictions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .prediction-box {
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            max-width: 350px;
+            overflow-x: auto;
+            background-color: #f9f9f9;
+        }
+        .prediction-box h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 4px 6px;
+            text-align: center;
+        }
+        th {
+            background-color: #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Hospital Analytics Dashboard</h1>
-    
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="csv_files" multiple required>
-        <button type="submit">Upload & Generate</button>
-    </form>
+    <div class="container">
+        <!-- Dashboard Image -->
+        {% if dashboard_img %}
+        <img src="data:image/png;base64,{{ dashboard_img }}" class="dashboard-img">
+        {% endif %}
 
-    {% if dashboard_img %}
-        <h2>Analytics Dashboard</h2>
-        <img src="data:image/png;base64,{{ dashboard_img }}" alt="Dashboard" style="width:100%; max-width:1200px;">
-    {% endif %}
+        <!-- Predictions -->
+        <div class="predictions">
+            {% if predictions.patient_forecast %}
+            <div class="prediction-box">
+                <h3>Patient Forecast</h3>
+                <table>
+                    <tr>
+                        {% for key in predictions.patient_forecast[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in predictions.patient_forecast %}
+                    <tr>
+                        {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            {% if predictions.doctor_forecast %}
+            {% for doctor, rows in predictions.doctor_forecast.items() %}
+            <div class="prediction-box">
+                <h3>Doctor Forecast: {{ doctor }}</h3>
+                <table>
+                    <tr>
+                        {% for key in rows[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in rows %}
+                    <tr>
+                        {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if predictions.equipment_forecast %}
+            {% for eq, rows in predictions.equipment_forecast.items() %}
+            <div class="prediction-box">
+                <h3>Equipment Forecast: {{ eq }}</h3>
+                <table>
+                    <tr>
+                        {% for key in rows[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in rows %}
+                    <tr>
+                        {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if predictions.disease_forecast %}
+            {% for disease, rows in predictions.disease_forecast.items() %}
+            <div class="prediction-box">
+                <h3>Disease Forecast: {{ disease }}</h3>
+                <table>
+                    <tr>
+                        {% for key in rows[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in rows %}
+                    <tr>
+                        {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>
