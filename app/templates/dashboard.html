@@ -3,157 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <title>Hospital Analytics Dashboard</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .dashboard-img {
-            max-width: 100%;
-            margin-bottom: 30px;
-        }
-        .predictions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-        .prediction-box {
-            border: 1px solid #ccc;
-            padding: 10px 15px;
-            border-radius: 8px;
-            max-width: 350px;
-            overflow-x: auto;
-            background-color: #f9f9f9;
-        }
-        .prediction-box h3 {
-            margin-top: 0;
-            font-size: 16px;
-            color: #333;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-size: 12px;
-        }
-        th, td {
-            border: 1px solid #aaa;
-            padding: 4px 6px;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
             text-align: center;
         }
-        th {
-            background-color: #ddd;
-        }
-        tr:nth-child(even) {
-            background-color: #f1f1f1;
-        }
+
         h1 {
+            color: #2c3e50;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+
+        .upload-box {
+            background: white;
+            padding: 20px;
+            width: 520px;
+            margin: 0 auto 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 22px;
+            background: #3498db;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .dashboard {
+            margin-top: 30px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .prediction-box {
+            background: white;
+            padding: 20px;
+            margin: 30px auto;
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.12);
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
-            margin-bottom: 20px;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+        }
+
+        .note {
+            color: #c0392b;
+            margin-top: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Hospital Analytics Dashboard</h1>
-    <div class="container">
-        <!-- Dashboard Image -->
-        {% if dashboard_img %}
-        <img src="data:image/png;base64,{{ dashboard_img }}" class="dashboard-img">
-        {% endif %}
 
-        <!-- Predictions -->
-        <div class="predictions">
-            {% if predictions.patient_forecast %}
-            <div class="prediction-box">
-                <h3>Patient Forecast</h3>
-                <table>
-                    <tr>
-                        {% for key in predictions.patient_forecast[0].keys() %}
-                        <th>{{ key }}</th>
-                        {% endfor %}
-                    </tr>
-                    {% for row in predictions.patient_forecast %}
-                    <tr>
-                        {% for value in row.values() %}
-                        <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-            {% endif %}
+<h1>🏥 Hospital Analytics & Forecasting System</h1>
 
-            {% if predictions.doctor_forecast %}
-            {% for doctor, rows in predictions.doctor_forecast.items() %}
-            <div class="prediction-box">
-                <h3>Doctor Forecast: {{ doctor }}</h3>
-                <table>
-                    <tr>
-                        {% for key in rows[0].keys() %}
-                        <th>{{ key }}</th>
-                        {% endfor %}
-                    </tr>
-                    {% for row in rows %}
-                    <tr>
-                        {% for value in row.values() %}
-                        <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
+<!-- Upload Section -->
+<div class="upload-box">
+    <form method="POST" enctype="multipart/form-data">
+        <h3>Upload Hospital CSV Files</h3>
+        <input type="file" name="csv_files" multiple required>
+        <br><br>
+        <button type="submit">Generate Analytics</button>
+    </form>
+</div>
+
+<!-- Analytics Dashboard -->
+{% if dashboard_img %}
+<div class="dashboard">
+    <h2>📊 Historical Analytics Dashboard</h2>
+    <img src="data:image/png;base64,{{ dashboard_img }}">
+</div>
+{% endif %}
+
+<!-- Prediction Section -->
+{% if can_predict %}
+
+<div class="prediction-box">
+    <h2>🔮 Next Year Forecast (ML Based)</h2>
+
+    <!-- Patient Forecast -->
+    <h3>📈 Patient Volume Forecast</h3>
+    <table>
+        <tr>
+            <th>Month</th>
+            <th>Expected Visits</th>
+        </tr>
+        {% for row in predictions.patient_forecast %}
+        <tr>
+            <td>{{ row.month }}</td>
+            <td>{{ row.visit_count_forecast }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Doctor Demand -->
+    <h3>👨‍⚕️ Doctor Demand Forecast</h3>
+    {% for doctor, rows in predictions.doctor_forecast.items() %}
+        <h4>{{ doctor }}</h4>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Expected Visits</th>
+            </tr>
+            {% for r in rows %}
+            <tr>
+                <td>{{ r.month }}</td>
+                <td>{{ r.visit_count_forecast }}</td>
+            </tr>
             {% endfor %}
-            {% endif %}
+        </table>
+    {% endfor %}
 
-            {% if predictions.equipment_forecast %}
-            {% for eq, rows in predictions.equipment_forecast.items() %}
-            <div class="prediction-box">
-                <h3>Equipment Forecast: {{ eq }}</h3>
-                <table>
-                    <tr>
-                        {% for key in rows[0].keys() %}
-                        <th>{{ key }}</th>
-                        {% endfor %}
-                    </tr>
-                    {% for row in rows %}
-                    <tr>
-                        {% for value in row.values() %}
-                        <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
+    <!-- Equipment Usage -->
+    <h3>🛠 Equipment Usage Forecast</h3>
+    {% for eq, rows in predictions.equipment_forecast.items() %}
+        <h4>{{ eq }}</h4>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Expected Usage</th>
+            </tr>
+            {% for r in rows %}
+            <tr>
+                <td>{{ r.month }}</td>
+                <td>{{ r.visit_count_forecast }}</td>
+            </tr>
             {% endfor %}
-            {% endif %}
+        </table>
+    {% endfor %}
 
-            {% if predictions.disease_forecast %}
-            {% for disease, rows in predictions.disease_forecast.items() %}
-            <div class="prediction-box">
-                <h3>Disease Forecast: {{ disease }}</h3>
-                <table>
-                    <tr>
-                        {% for key in rows[0].keys() %}
-                        <th>{{ key }}</th>
-                        {% endfor %}
-                    </tr>
-                    {% for row in rows %}
-                    <tr>
-                        {% for value in row.values() %}
-                        <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
+    <!-- Disease Probability -->
+    <h3>🦠 Disease Trend Forecast</h3>
+    {% for disease, rows in predictions.disease_forecast.items() %}
+        <h4>{{ disease }}</h4>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Expected Cases</th>
+            </tr>
+            {% for r in rows %}
+            <tr>
+                <td>{{ r.month }}</td>
+                <td>{{ r.visit_count_forecast }}</td>
+            </tr>
             {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+        </table>
+    {% endfor %}
+</div>
+
+{% elif dashboard_img %}
+<div class="note">
+    ⚠ Prediction requires at least 3 years of data. Showing analytics only.
+</div>
+{% endif %}
+
 </body>
 </html>
