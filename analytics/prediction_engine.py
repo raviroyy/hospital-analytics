@@ -22,7 +22,7 @@ def _forecast(df):
 
     return pd.DataFrame({
         'month': pd.date_range(monthly['month'].iloc[-1], periods=12, freq='M'),
-        'forecast': preds
+        'visit_count_forecast': preds
     })
 
 def predict_patient_volume(df):

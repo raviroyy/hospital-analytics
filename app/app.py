@@ -8,6 +8,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
+import calendar
+
 
 from analytics.prediction_engine import (
     can_predict,
@@ -26,6 +28,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
+
 # -----------------------------
 # CSV Processing & Dashboard
 # -----------------------------
@@ -39,6 +42,11 @@ def process_csv(file_paths):
 
     # Aggregations
     monthly_visits = data.groupby("month")["visit_count"].sum()
+    monthly_only = (
+        monthly_visits
+        .groupby(monthly_visits.index.month)
+        .sum()
+    )
 
     doctor_monthly = (
         data.groupby(["month", "doctor_type"])["visit_count"]
@@ -70,19 +78,26 @@ def process_csv(file_paths):
     # -----------------------------
     # Dashboard Figure (2x2)
     # -----------------------------
-    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    fig, axes = plt.subplots(2, 2, figsize=(30, 15))
     plt.subplots_adjust(hspace=0.35, wspace=0.25)
 
     # 1️⃣ Monthly Patient Visits
+
     sns.barplot(
-        x=monthly_visits.index.strftime("%Y-%m"),
+        x=monthly_visits.index,
         y=monthly_visits.values,
         ax=axes[0, 0],
         color="#4C72B0"
     )
+
     axes[0, 0].set_title("Monthly Patient Visits")
-    axes[0, 0].tick_params(axis="x", rotation=45)
     axes[0, 0].grid(axis="y", linestyle="--", alpha=0.5)
+
+    # 🔧 Month + Year labels
+    axes[0, 0].set_xticklabels(
+        monthly_visits.index.strftime('%b-%Y'),
+        rotation=90
+    )
 
     # 2️⃣ Doctor Demand
     if not doctor_monthly.empty:
@@ -94,8 +109,13 @@ def process_csv(file_paths):
             width=0.8
         )
         axes[0, 1].set_title("Doctor Demand by Month")
-        axes[0, 1].tick_params(axis="x", rotation=45)
+        axes[0, 1].tick_params(rotation=90)
         axes[0, 1].grid(axis="y", linestyle="--", alpha=0.5)
+        axes[0, 1].set_xticklabels(
+            doctor_monthly.index.strftime('%b-%Y'),
+            rotation=90
+        )
+        
 
     # 3️⃣ Equipment Usage
     if not equipment_monthly.empty:
@@ -109,6 +129,10 @@ def process_csv(file_paths):
         axes[1, 0].set_title("Equipment Usage by Month")
         axes[1, 0].tick_params(axis="x", rotation=45)
         axes[1, 0].grid(axis="y", linestyle="--", alpha=0.5)
+        axes[1, 0].set_xticklabels(
+            equipment_monthly.index.strftime('%b-%Y'),
+            rotation=90
+        )
 
     # 4️⃣ Disease Trends
     if not disease_monthly.empty:
@@ -122,10 +146,13 @@ def process_csv(file_paths):
         axes[1, 1].set_title("Disease Distribution by Month")
         axes[1, 1].tick_params(axis="x", rotation=45)
         axes[1, 1].grid(axis="y", linestyle="--", alpha=0.5)
+        axes[1, 1].set_xticklabels(
+            disease_monthly.index.strftime('%b-%Y'),
+            rotation=90
+        )
 
     dashboard_img = fig_to_base64(fig)
     return dashboard_img, data
-
 
 # -----------------------------
 # Routes
